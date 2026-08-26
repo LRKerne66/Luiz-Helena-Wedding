@@ -2,17 +2,17 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { fetchGifts } from '@/lib/api'
-import { GIFTS_CONFIG } from '@/app/data/gifts'
+import { GIFTS_CONFIG } from '@/app/config/gifts'
 
-const POLLING_INTERVAL = 15000
+const INTERVAL = 15000
 
-function mergeWithConfig(apiData) {
+function merge(apiData) {
   if (!Array.isArray(apiData) || apiData.length === 0) {
     return GIFTS_CONFIG.map(g => ({ ...g, taken: 0 }))
   }
-  return GIFTS_CONFIG.map(config => {
-    const apiGift = apiData.find(g => g.value === config.value)
-    return { ...config, taken: apiGift?.taken ?? 0, max: apiGift?.max ?? config.max }
+  return GIFTS_CONFIG.map(cfg => {
+    const api = apiData.find(g => g.value === cfg.value)
+    return { ...cfg, taken: api?.taken ?? 0, max: api?.max ?? cfg.max }
   })
 }
 
@@ -21,14 +21,13 @@ export function useGifts() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  const loadGifts = useCallback(async () => {
+  const load = useCallback(async () => {
     try {
       const data = await fetchGifts()
-      setGifts(mergeWithConfig(data))
+      setGifts(merge(data))
       setError(null)
     } catch (err) {
-      console.warn('Falha ao carregar presentes:', err.message)
-      setGifts(mergeWithConfig([]))
+      setGifts(merge([]))
       setError('Não foi possível conectar à planilha.')
     } finally {
       setLoading(false)
@@ -36,10 +35,10 @@ export function useGifts() {
   }, [])
 
   useEffect(() => {
-    loadGifts()
-    const interval = setInterval(loadGifts, POLLING_INTERVAL)
-    return () => clearInterval(interval)
-  }, [loadGifts])
+    load()
+    const i = setInterval(load, INTERVAL)
+    return () => clearInterval(i)
+  }, [load])
 
-  return { gifts, loading, error, refresh: loadGifts }
+  return { gifts, loading, error, refresh: load }
 }

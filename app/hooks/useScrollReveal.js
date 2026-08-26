@@ -2,23 +2,21 @@
 
 import { useEffect } from 'react'
 
-export function useScrollReveal(options = {}) {
-  const { threshold = 0.1, revealedClass = 'revealed' } = options
-
+export function useScrollReveal() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add(revealedClass)
+            entry.target.classList.add('visible')
             observer.unobserve(entry.target)
           }
         })
       },
-      { threshold, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
     )
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el))
     return () => observer.disconnect()
-  }, [threshold, revealedClass])
+  }, [])
 }

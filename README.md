@@ -1,67 +1,66 @@
 # 💍 Luiz & Helena — Site de Casamento v3
 
-Site de casamento com design premium, QR codes PIX funcionais e controle de vagas via Google Sheets.
+Site de casamento elegante e contemporâneo, inspirado no design dos sites da Casar.com.
 
-## ✅ O que está incluído
+## 🎨 Design System
 
-- **Design premium** com animações, partículas e glassmorphism
-- **QR Code PIX** 100% funcional e validado (correção do CRC16 e limites EMV)
-- **Limites de vagas** por valor com atualização em tempo real
-- **Contador regressivo** animado
-- **Google Sheets** como banco de dados
-- **Código documentado** e modularizado para fácil manutenção
+### Paleta de Cores
+| Token | Hex | Uso |
+|-------|-----|-----|
+| `--sage` | `#8B9D83` | Verde musgo — acentos, botões, badges |
+| `--champagne` | `#C9A96E` | Dourado champagne — destaques, títulos, divisores |
+| `--cream` | `#F5F0E8` | Creme quente — fundos de seções |
+| `--ivory` | `#FAF9F6` | Marfim — fundo principal |
+| `--charcoal` | `#2D2D2D` | Carvão — texto principal |
+| `--taupe` | `#8A8279` | Taupe — texto secundário |
 
-## 🚀 Deploy
+### Tipografia
+| Uso | Fonte | Peso |
+|-----|-------|------|
+| Títulos / Nomes | Cormorant Garamond | 400, 500, 600 |
+| Corpo / UI | Inter | 300, 400, 500, 600 |
 
-### 1. Google Sheets
+## 🚀 Deploy no Vercel
 
-Siga as instruções do README original para configurar a planilha e o Apps Script.
+1. Configure a variável de ambiente `NEXT_PUBLIC_SCRIPT_URL` no painel do Vercel
+2. O deploy é automático a cada push no GitHub
 
-### 2. Variáveis de Ambiente
+## 📝 Como personalizar
 
-Crie um arquivo `.env.local` na raiz do projeto:
+### Trocar fotos do casal
+1. Suba as fotos em `/public/fotos/` (ou use um CDN como Cloudinary/Imgur)
+2. Edite os componentes em `app/sections/` e troque os `src` das `<img>`
+3. **Hero**: edite `app/sections/HeroSection.js` → propriedade `heroImage`
+4. **Nossa História**: edite `app/sections/StorySection.js` → propriedades `couplePhoto1`, `couplePhoto2`
 
-```
-NEXT_PUBLIC_SCRIPT_URL=https://script.google.com/macros/s/SEU_ID/exec
-```
+### Trocar textos
+- **Nomes do casal**: `app/config/couple.js` → `COUPLE_NAMES`
+- **Data do casamento**: `app/config/couple.js` → `WEDDING_DATE`
+- **Local**: `app/config/couple.js` → `VENUE`
+- **Texto da história**: `app/sections/StorySection.js`
+- **Texto da cerimônia**: `app/sections/CeremonySection.js`
 
-### 3. Build e Deploy
+### Trocar cores
+Edite `app/globals.css` → seção `:root` (CSS Custom Properties)
 
-```bash
-npm install
-npm run build
-```
+### Trocar chave PIX
+Edite `lib/pix.js` → constante `PIX_KEY`
 
-## 🎨 Cores do Design
-
-| Elemento | Cor |
-|----------|-----|
-| Fundo principal | `#faf8f5` (creme) |
-| Texto | `#2d2a26` (marrom escuro) |
-| Destaque/Dourado | `#c9a96e` |
-| Verde | `#6b8e6b` |
-
-## 🛠️ Estrutura de Pastas
+## 📁 Estrutura
 
 ```
 app/
-  components/     # Componentes React reutilizáveis
-  data/           # Configurações de dados (presentes)
-  hooks/          # Custom React hooks
-  globals.css     # Estilos globais e animações
-  layout.js       # Layout principal
-  page.js         # Página inicial
+  sections/        # Seções da página (Hero, Story, Ceremony, Gifts, Footer)
+  components/      # Componentes reutilizáveis (Navbar, Particles, Toast, Modal)
+  hooks/           # Custom hooks (countdown, gifts, toast, scroll-reveal)
+  config/          # Configurações centralizadas (casal, presentes)
+  globals.css      # Estilos globais, animações, design tokens
+  layout.js        # Layout raiz com fontes e metadados
+  page.js          # Página principal (monta todas as seções)
 lib/
-  pix.js          # Lógica PIX (documentada)
-  api.js          # Integração com Google Sheets
-  utils.js        # Funções utilitárias
+  pix.js           # Gerador de payload PIX (corrigido e validado)
+  api.js           # Comunicação com Google Sheets
+  utils.js         # Funções utilitárias
+public/
+  fotos/           # 📸 COLOQUE AS FOTOS DO CASAL AQUI
 ```
-
-## 📝 Para modificar
-
-- **Chave PIX**: edite `lib/pix.js` → constante `PIX_KEY`
-- **Data do casamento**: edite `app/hooks/useCountdown.js` → `WEDDING_DATE`
-- **Presentes**: edite `app/data/gifts.js` → `GIFTS_CONFIG`
-- **Cores**: edite `app/globals.css` → variáveis CSS `:root`
-- **Textos**: edite os componentes em `app/components/`
-# Luiz-Helena-Wedding

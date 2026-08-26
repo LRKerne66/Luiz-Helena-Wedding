@@ -2,15 +2,11 @@
 
 import { useState, useCallback } from 'react'
 
-const DEFAULT_DURATION = 4000
-
-export function useToast(duration = DEFAULT_DURATION) {
+export function useToast(duration = 4000) {
   const [toast, setToast] = useState(null)
-
-  const showToast = useCallback((message) => {
-    setToast(message)
+  const showToast = useCallback((msg) => {
+    setToast(msg)
     setTimeout(() => setToast(null), duration)
   }, [duration])
-
   return { toast, showToast }
 }
