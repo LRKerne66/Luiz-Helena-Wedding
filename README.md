@@ -64,3 +64,4 @@ lib/
 - **Presentes**: edite `app/data/gifts.js` → `GIFTS_CONFIG`
 - **Cores**: edite `app/globals.css` → variáveis CSS `:root`
 - **Textos**: edite os componentes em `app/components/`
+# Luiz-Helena-Wedding
