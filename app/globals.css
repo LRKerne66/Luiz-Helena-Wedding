@@ -1,0 +1,94 @@
+/* ============================================================
+   GLOBAL STYLES — Luiz & Helena Wedding
+   Design System: Creme + Dourado + Verde
+   ============================================================ */
+
+:root {
+  --color-bg: #faf8f5;
+  --color-bg-dark: #1a1816;
+  --color-text: #2d2a26;
+  --color-text-light: #5c554d;
+  --color-text-muted: #8c8279;
+  --color-gold: #c9a96e;
+  --color-gold-dark: #b8945f;
+  --color-green: #6b8e6b;
+  --color-green-dark: #5a7a5a;
+  --color-white: #ffffff;
+  --color-cream: #f5f3f0;
+  --color-border: #e8e4df;
+  --color-border-light: #f0ebe5;
+  --font-serif: 'Playfair Display', 'Georgia', serif;
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 999px;
+  --shadow-sm: 0 2px 8px rgba(45,42,38,0.04);
+  --shadow-md: 0 4px 20px rgba(45,42,38,0.06);
+  --shadow-lg: 0 12px 40px rgba(45,42,38,0.08);
+  --shadow-xl: 0 20px 60px rgba(45,42,38,0.12);
+  --shadow-gold: 0 8px 32px rgba(201,169,110,0.2);
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; overflow-x: hidden; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse-gold { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(201,169,110,0.4); } 50% { opacity: 0.8; box-shadow: 0 0 0 12px rgba(201,169,110,0); } }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-8px) rotate(2deg); } 66% { transform: translateY(4px) rotate(-1deg); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+@keyframes particleFloat { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.5; } 90% { opacity: 0.5; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+@keyframes ringPulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.5); opacity: 0; } }
+
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+.animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; }
+.delay-5 { animation-delay: 0.5s; opacity: 0; }
+.delay-6 { animation-delay: 0.6s; opacity: 0; }
+
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+.glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); }
+.glass-dark { background: rgba(26,24,22,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(201,169,110,0.15); }
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--color-gold) 0%, #e8d5a8 25%, var(--color-gold) 50%, #e8d5a8 75%, var(--color-gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, #1a1816, #2d2a26, #3d3530, #1a1816);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gold); }
+::selection { background: rgba(201,169,110,0.3); color: var(--color-text); }
